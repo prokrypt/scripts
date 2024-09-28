@@ -13,6 +13,12 @@ vdop=000
 
 echo -ne "\n\n\n\n"
 
+trap killstream EXIT
+
+function killstream(){
+	kill $pid
+}
+
 while read -r line; do
 	[[ -n $line ]] || continue
 	IFS=, read type _ <<< $line
@@ -47,7 +53,7 @@ while read -r line; do
 			lats="${lat:0:${#lat}-9}° ${lat: -9}\"$latd";
 			lons="${lon:0:${#lon}-9}° ${lon: -9}\"$lond";
 			times="${time:0:2}:${time:2:2}:${time:4:2}"
-			printf "\r\033[4ATime: %8s\nSats: %-2i  Fix: $fix\nLat: %17s\nLon: %17s\n(p/h/v)dop: %0.2f %0.2f %0.2f" "$times" "$sats" "$lats" "$lons" "$pdop" "$hdop" "$vdop"
+			printf "\r\033[4ATime: %8s\nSats: %-2i  Fix: $fix\nLat: %17s\nLon: %17s\n(p/h/v)dop: %4.2f %4.2f %4.2f" "$times" "$sats" "$lats" "$lons" "$pdop" "$hdop" "$vdop"
 		}
 		eval old_$i=\$$i
 	done
@@ -57,4 +63,4 @@ pid=$!
 
 read
 
-kill $pid
+killstream
