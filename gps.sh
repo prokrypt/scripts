@@ -59,7 +59,7 @@ while read -r line; do
 		printf "\r\033[5ATime: %8s\nSats: %-2i  Fix: $fix\nLat: %17s\nLon: %17s\nAlt: %7.2f%s\n[phv]dop: %5.2f %5.2f %5.2f"\
 			"$times" "$sats" "$lats" "$lons" "$alt" "$altu" "$pdop" "$hdop" "$vdop"
 	}
-	oldhash=$hash
+	oldhash="$hash"
 done < $dev&
 
 pid=$!
