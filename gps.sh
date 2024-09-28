@@ -12,8 +12,9 @@ pdop=0
 vdop=0
 latd=X
 lond=X
+alt=00.00
 
-echo -ne "\n\n\n\n"
+echo -ne "\n\n\n\n\n"
 
 trap killstream EXIT
 
@@ -52,10 +53,11 @@ while read -r line; do
 		#[[ -n ${!i} ]] || continue
 		eval oldv=\$old_$i
 		[[ ! "$oldv" = "${!i}" ]] && {
-			lats="${lat:0:${#lat}-9}° ${lat: -9}\"$latd";
-			lons="${lon:0:${#lon}-9}° ${lon: -9}\"$lond";
+			lats="${lat:0:${#lat}-9}° ${lat: -9}'$latd";
+			lons="${lon:0:${#lon}-9}° ${lon: -9}'$lond";
 			times="${time:0:2}:${time:2:2}:${time:4:2}"
-			printf "\r\033[4ATime: %8s\nSats: %-2i  Fix: $fix\nLat: %17s\nLon: %17s\n[phv]dop: %5.2f %5.2f %5.2f" "$times" "$sats" "$lats" "$lons" "$pdop" "$hdop" "$vdop"
+			printf "\r\033[5ATime: %8s\nSats: %-2i  Fix: $fix\nLat: %17s\nLon: %17s\nAlt: %7.2f%s\n[phv]dop: %5.2f %5.2f %5.2f"\
+				"$times" "$sats" "$lats" "$lons" "$alt" "$altu" "$pdop" "$hdop" "$vdop"
 		}
 		eval old_$i=\$$i
 	done
