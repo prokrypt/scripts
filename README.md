@@ -2,7 +2,7 @@
 random bash scripts
 
 ---
-gps.sh: prints some info outputted by gps. I use this in opnsense. press enter or control+c to exit
+gps.sh: parses nmea sentences from a gps and displays it. I use this in opnsense. press enter or control+c to exit
 ```
 Time: 22:55:53
 Sats: 5   Fix: 1
