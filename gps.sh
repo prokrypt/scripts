@@ -2,7 +2,7 @@
 
 dev=/dev/cuaU0
 
-lat=0000.000000
+lat=00000.000000
 lon=00000.000000
 time=000000
 fix=0
@@ -10,6 +10,8 @@ sats=0
 hdop=0
 pdop=0
 vdop=0
+latd=X
+lond=X
 
 echo -ne "\n\n\n\n"
 
