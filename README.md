@@ -4,6 +4,7 @@ random bash scripts
 ---
 gps.sh: parses nmea sentences from a gps and displays it. I use this in opnsense. press enter or control+c to exit
 ```
+GPS Info from /dev/cuaU0
 Time: 22:55:53
 Sats: 5   Fix: 1
 Lat:  37° 4x.x97426"N
