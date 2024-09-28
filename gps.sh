@@ -14,13 +14,14 @@ latd=X
 lond=X
 alt=00.00
 
-echo -ne "\n\n\n\n\n"
 
 trap killstream EXIT
 
 function killstream(){
 	kill $pid
 }
+
+echo -ne "GPS Info\n\n\n\n\n"
 
 while read -r line; do
 	[[ -n $line ]] || continue
@@ -49,18 +50,16 @@ while read -r line; do
 		*)
 			echo unknon type $type;;
 	esac
-	for i in time lat lon fix sats hdop pdop vdop; do
-		#[[ -n ${!i} ]] || continue
-		eval oldv=\$old_$i
-		[[ ! "$oldv" = "${!i}" ]] && {
-			lats="${lat:0:${#lat}-9}° ${lat: -9}'$latd";
-			lons="${lon:0:${#lon}-9}° ${lon: -9}'$lond";
-			times="${time:0:2}:${time:2:2}:${time:4:2}"
-			printf "\r\033[5ATime: %8s\nSats: %-2i  Fix: $fix\nLat: %17s\nLon: %17s\nAlt: %7.2f%s\n[phv]dop: %5.2f %5.2f %5.2f"\
-				"$times" "$sats" "$lats" "$lons" "$alt" "$altu" "$pdop" "$hdop" "$vdop"
-		}
-		eval old_$i=\$$i
-	done
+	hash="$lat$lon$fix$sats$hdop$pdop$vdop"
+	[[ ! "$oldhash" = "$hash" ]] && {
+		lats="${lat:0:${#lat}-9}° ${lat: -9}'$latd";
+		lons="${lon:0:${#lon}-9}° ${lon: -9}'$lond";
+		times="${time:0:2}:${time:2:2}:${time:4:2}"
+		((x++))
+		printf "\r\033[5ATime: %8s\nSats: %-2i  Fix: $fix\nLat: %17s\nLon: %17s\nAlt: %7.2f%s\n[phv]dop: %5.2f %5.2f %5.2f"\
+			"$times" "$sats" "$lats" "$lons" "$alt" "$altu" "$pdop" "$hdop" "$vdop"
+	}
+	oldhash=$hash
 done < $dev&
 
 pid=$!
