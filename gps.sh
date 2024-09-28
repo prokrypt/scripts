@@ -48,7 +48,7 @@ while read -r line; do
 		*)
 			echo unknon type $type;;
 	esac
-	hash="$lat$lon$fix$sats$hdop$pdop$vdop"
+	hash="$time$lat$lon$fix$sats$hdop$pdop$vdop"
 	[[ ! "$oldhash" = "$hash" ]] && {
 		[[ -n $lat ]] && lats="${lat:0:${#lat}-9}° ${lat: -9}'$latd";
 		[[ -n $lon ]] && lons="${lon:0:${#lon}-9}° ${lon: -9}'$lond";
