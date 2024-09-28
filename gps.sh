@@ -21,7 +21,7 @@ function killstream(){
 	kill $pid
 }
 
-echo -ne "GPS Info\n\n\n\n\n"
+echo -ne "GPS Info from $dev\n\n\n\n\n\n"
 
 while read -r line; do
 	[[ -n $line ]] || continue
