@@ -55,7 +55,7 @@ while read -r line; do
 		[[ -n $alt ]] && printf -v alts "%7.2f$altu" $alt
 		times="${time:0:2}:${time:2:2}:${time:4:2}"
 		((x++))
-		printf "\r\033[5ATime: %8s\nSats: %-2i  Fix: $fix\nLat: %17s\nLon: %17s\nAlt: %s\n[phv]dop: %5.2f %5.2f %5.2f"\
+		printf "    \r\033[5ATime: %8s\nSats: %-2i  Fix: $fix\nLat: %17s\nLon: %17s\nAlt: %s\n[phv]dop: %5.2f %5.2f %5.2f"\
 			"$times" "$sats" "$lats" "$lons" "$alts" "$pdop" "$hdop" "$vdop"
 	}
 	oldhash="$hash"
